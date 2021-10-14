@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 700,
+    "width": 800,
     "height": 400,
     "data": {
         "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report-2021.csv"
@@ -79,6 +79,6 @@
         ]
     },
     "config": {
-        "background": "#F0E9E2"
+        "background": "#FBF9F7"
     }
 }
