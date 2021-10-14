@@ -1,0 +1,122 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 400,
+    "data": {
+        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report.csv"
+    },
+    "params": [
+        {
+            "name": "top_k_countries",
+            "value": 5,
+            "bind": {
+                "input": "range",
+                "min": 1,
+                "max": 10,
+                "step": 1
+            }
+        }
+    ],
+    "transform": [
+        {
+            "sort": [
+                {
+                    "field": "life_ladder",
+                    "order": "descending"
+                }
+            ],
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "ladder_rank"
+                }
+            ],
+            "groupby": [
+                "year"
+            ]
+        },
+        {
+            "filter": "datum.ladder_rank <= top_k_countries"
+        }
+    ],
+    "encoding": {
+        "x": {
+            "field": "year",
+            "title": "Year",
+            "type": "ordinal",
+            "axis": {
+                "domain": false,
+                "titlePadding": 15,
+                "labelAngle": 0
+            }
+        },
+        "y": {
+            "field": "ladder_rank",
+            "title": "Rank of Happiness",
+            "type": "quantitative",
+            "sort": "descending",
+            "scale": {
+                "domain": [
+                    0.5,
+                    {
+                        "expr": "top_k_countries+0.5"
+                    }
+                ]
+            },
+            "axis": {
+                "domain": false,
+                "titlePadding": 15,
+                "tickCount": {
+                    "expr": "top_k_countries"
+                },
+                "labelAngle": 0,
+                "tickMinStep": 1
+            }
+        },
+        "color": {
+            "field": "country_name",
+            "type": "nominal"
+        },
+        "tooltip": [
+            {
+                "field": "country_name",
+                "title": "Country"
+            },
+            {
+                "field": "life_ladder",
+                "title": "Happiness Ladder Score",
+                "format": ".3f"
+            }
+        ]
+    },
+    "layer": [
+        {
+            "mark": {
+                "type": "line",
+                "interpolate": "monotone"
+            },
+            "encoding": {
+                "color": {
+                    "field": "country_name"
+                },
+                "size": {
+                    "value": 1
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "tick",
+                "thickness": 5
+            },
+            "encoding": {
+                "color": {
+                    "field": "country_name"
+                }
+            }
+        }
+    ],
+    "config": {
+        "background": "#F0E9E2"
+    }
+}

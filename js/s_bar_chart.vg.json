@@ -1,0 +1,84 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 400,
+    "data": {
+        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report-2021.csv"
+    },
+    "transform": [
+        {
+            "sort": [
+                {
+                    "field": "ladder_score",
+                    "order": "descending"
+                }
+            ],
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "ladder_rank"
+                }
+            ]
+        },
+        {
+            "filter": "datum.ladder_rank <= 20"
+        },
+        {
+            "fold": [
+                "Dystopia+residual",
+                "explained_by:Log_GDP_per_capita",
+                "explained_by:Social_support",
+                "explained_by:Healthy_life_expectancy",
+                "explained_by:Generosity",
+                "explained_by:Freedom_to_make_life_choices",
+                "explained_by:perceptions_of_corruption"
+            ],
+            "as": [
+                "explained_by",
+                "factor"
+            ]
+        }
+    ],
+    "mark": {
+        "type": "bar"
+    },
+    "encoding": {
+        "y": {
+            "field": "country_name",
+            "title": "Country",
+            "axis": {
+                "domain": false,
+                "titlePadding": 15
+            }
+        },
+        "x": {
+            "field": "factor",
+            "title": "Happiness Ladder Score",
+            "type": "quantitative",
+            "axis": {
+                "domain": false,
+                "grid": false,
+                "titlePadding": 15,
+                "labelFlush": false
+            }
+        },
+        "color": {
+            "field": "explained_by",
+            "type": "nominal"
+        },
+        "tooltip": [
+            {
+                "field": "country_name",
+                "title": "Country"
+            },
+            {
+                "field": "ladder_score",
+                "title": "Happiness Ladder Score",
+                "format": ".3f"
+            }
+        ]
+    },
+    "config": {
+        "background": "#F0E9E2"
+    }
+}

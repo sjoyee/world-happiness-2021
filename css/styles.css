@@ -1,0 +1,20 @@
+body {
+    background-color: #F0E9E2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    color: grey;
+}
+
+#container {
+    text-align: center;
+}
+
+.column {
+    width: 30%;
+}
+
+.column-right {
+    width: 40%;
+}

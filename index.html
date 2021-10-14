@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="js/vega_lite_vis.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>World Happiness 2021</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>World Happiness Report</h1>
+
+      <p>
+        The World Happiness Report is a landmark survey of the state of global
+        happiness.
+      </p>
+
+      <br />
+      <h2>World Map of Happiness</h2>
+      <p>
+        In this map, check out the ladder scores of happiness for each country.
+      </p>
+      <div id="choropleth_map" style="margin: 50px"></div>
+      <h2>World Rank of Happiness</h2>
+      <h3>Rank of Happiness of the Top K Countries</h3>
+      <div id="line_chart" style="margin: 50px"></div>
+      <h2>Factors of World Happiness</h2>
+      <p>
+        The happiness score estimate the extent to which each of six factors –
+        economic production, social support, life expectancy, freedom, absence
+        of corruption, and generosity contribute to making life evaluations
+        higher in each country than they are in Dystopia
+      </p>
+      <h3>Factors of World Happiness in the Past Years</h3>
+      <div id="parallel_chart" style="margin: 50px"></div>
+      <h3>In 2021,</h3>
+      <h3>How do the factors make up the final Happiness Score?</h3>
+      <div id="bar_chart" style="margin: 50px"></div>
+      <h2>Average Happiness Ladder Score</h2>
+      <h3>
+        Average Happiness Ladder Score of Different Regions from 2005 to 2020
+      </h3>
+      <div id="area_chart" style="margin: 50px"></div>
+    </div>
+  </body>
+</html>

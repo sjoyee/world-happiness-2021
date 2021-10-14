@@ -1,0 +1,250 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report.csv"
+    },
+    "params": [
+        {
+            "name": "year_selection",
+            "value": 2016,
+            "bind": {
+                "input": "range",
+                "min": 2016,
+                "max": 2019,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "sort": [
+                {
+                    "field": "life_ladder",
+                    "order": "descending"
+                }
+            ],
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "ladder_rank"
+                }
+            ],
+            "groupby": [
+                "year"
+            ]
+        },
+        {
+            "filter": "datum.ladder_rank <= 20 && datum.year == year_selection"
+        },
+        {
+            "window": [
+                {
+                    "op": "count",
+                    "as": "index"
+                }
+            ]
+        },
+        {
+            "fold": [
+                "social_support",
+                "healthy_life_expectancy_at_birth",
+                "generosity",
+                "freedom_to_make_life_choices",
+                "perceptions_of_corruption"
+            ]
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "min",
+                    "field": "value",
+                    "as": "min"
+                },
+                {
+                    "op": "max",
+                    "field": "value",
+                    "as": "max"
+                }
+            ],
+            "groupby": [
+                "key"
+            ]
+        },
+        {
+            "calculate": "abs((datum.value - datum.min) / (datum.max - datum.min))",
+            "as": "norm_val"
+        },
+        {
+            "calculate": "abs(datum.min + datum.max) / 2",
+            "as": "mid"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {
+                "type": "rule",
+                "color": "lightgray"
+            },
+            "encoding": {
+                "detail": {
+                    "aggregate": "count"
+                },
+                "x": {
+                    "field": "key"
+                }
+            }
+        },
+        {
+            "mark": "line",
+            "encoding": {
+                "color": {
+                    "type": "nominal",
+                    "field": "country_name"
+                },
+                "detail": {
+                    "type": "nominal",
+                    "field": "index"
+                },
+                "x": {
+                    "type": "nominal",
+                    "field": "key"
+                },
+                "y": {
+                    "type": "quantitative",
+                    "field": "norm_val",
+                    "axis": null
+                },
+                "opacity": {
+                    "value": 0.5
+                },
+                "tooltip": [
+                    {
+                        "type": "nominal",
+                        "field": "country_name",
+                        "title": "Country"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "life_ladder",
+                        "title": "Happiness Score"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "log_GDP_per_capita"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "social_support"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "healthy_life_expectancy_at_birth"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "generosity"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "freedom_to_make_life_choices"
+                    },
+                    {
+                        "type": "quantitative",
+                        "field": "perceptions_of_corruption"
+                    }
+                ]
+            }
+        },
+        {
+            "encoding": {
+                "x": {
+                    "type": "nominal",
+                    "field": "key"
+                },
+                "y": {
+                    "value": 0
+                }
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "text",
+                        "style": "label"
+                    },
+                    "encoding": {
+                        "text": {
+                            "aggregate": "max",
+                            "field": "max"
+                        }
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "tick",
+                        "style": "tick",
+                        "size": 8,
+                        "color": "lightgrey"
+                    }
+                }
+            ]
+        },
+        {
+            "encoding": {
+                "x": {
+                    "type": "nominal",
+                    "field": "key"
+                },
+                "y": {
+                    "value": 300
+                }
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "text",
+                        "style": "label"
+                    },
+                    "encoding": {
+                        "text": {
+                            "aggregate": "min",
+                            "field": "min"
+                        }
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "tick",
+                        "style": "tick",
+                        "size": 8,
+                        "color": "lightgrey"
+                    }
+                }
+            ]
+        }
+    ],
+    "config": {
+        "axisX": {
+            "domain": false,
+            "labelAngle": 0,
+            "tickColor": "lightgrey",
+            "title": null
+        },
+        "view": {
+            "stroke": null
+        },
+        "style": {
+            "label": {
+                "baseline": "middle",
+                "align": "right",
+                "dx": -5
+            },
+            "tick": {
+                "orient": "horizontal"
+            }
+        },
+        "background": "#F0E9E2"
+    }
+}
