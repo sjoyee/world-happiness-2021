@@ -1,84 +1,210 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 400,
     "data": {
-        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report-2021.csv"
+      "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report-2021.csv"
     },
-    "transform": [
-        {
-            "sort": [
-                {
-                    "field": "ladder_score",
-                    "order": "descending"
-                }
-            ],
-            "window": [
-                {
-                    "op": "rank",
-                    "as": "ladder_rank"
-                }
-            ]
-        },
-        {
-            "filter": "datum.ladder_rank <= 20"
-        },
-        {
-            "fold": [
-                "Dystopia+residual",
-                "explained_by:Log_GDP_per_capita",
-                "explained_by:Social_support",
-                "explained_by:Healthy_life_expectancy",
-                "explained_by:Generosity",
-                "explained_by:Freedom_to_make_life_choices",
-                "explained_by:perceptions_of_corruption"
-            ],
-            "as": [
-                "explained_by",
-                "factor"
-            ]
+    "params": [
+      {
+        "name": "top_k_countries",
+        "value": 50,
+        "bind": {
+          "input": "range",
+          "min": 10,
+          "max": 100,
+          "step": 10,
+          "name": "Top K Countries"
         }
+      }
     ],
-    "mark": {
-        "type": "bar"
-    },
-    "encoding": {
-        "y": {
-            "field": "country_name",
-            "title": "Country",
-            "axis": {
-                "domain": false,
-                "titlePadding": 15
-            }
-        },
-        "x": {
-            "field": "factor",
-            "title": "Happiness Ladder Score",
-            "type": "quantitative",
-            "axis": {
-                "domain": false,
-                "grid": false,
-                "titlePadding": 15,
-                "labelFlush": false
-            }
-        },
-        "color": {
-            "field": "explained_by",
-            "type": "nominal"
-        },
-        "tooltip": [
-            {
-                "field": "country_name",
-                "title": "Country"
+    "vconcat": [
+      {
+        "width": 1000,
+        "height": 400,
+        "layer": [
+          {
+            "transform": [
+              {
+                "sort": [{"field": "ladder_score", "order": "descending"}],
+                "window": [{"op": "rank", "as": "ladder_rank"}]
+              },
+              {"filter": "datum.ladder_rank <= top_k_countries"},
+              {"filter": {"param": "region"}}
+            ],
+            "mark": {
+              "type": "text",
+              "align": "right",
+              "baseline": "bottom",
+              "dy": -200,
+              "dx": -150,
+              "fontStyle": "italic"
             },
-            {
+            "encoding": {
+              "text": {
                 "field": "ladder_score",
-                "title": "Happiness Ladder Score",
-                "format": ".3f"
+                "type": "quantitative",
+                "condition": [
+                  {
+                    "test": "datum.ladder_rank == 1",
+                    "value": ["Happiest Country in 2021: Finland"]
+                  }
+                ]
+              },
+              "color": {"value": "darkblue"},
+              "opacity": {
+                "condition": {"test": "datum.ladder_rank == 1", "value": 1},
+                "value": 0
+              }
             }
+          },
+          {
+            "transform": [
+              {
+                "sort": [{"field": "ladder_score", "order": "descending"}],
+                "window": [{"op": "rank", "as": "ladder_rank"}]
+              },
+              {"filter": "datum.ladder_rank <= top_k_countries"},
+              {"filter": {"param": "region"}},
+              {
+                "fold": [
+                  "Dystopia+residual",
+                  "explained_by:Log_GDP_per_capita",
+                  "explained_by:Social_support",
+                  "explained_by:Healthy_life_expectancy",
+                  "explained_by:Generosity",
+                  "explained_by:Freedom_to_make_life_choices",
+                  "explained_by:perceptions_of_corruption"
+                ],
+                "as": ["explained_by", "factor"]
+              }
+            ],
+            "mark": {"type": "bar"},
+            "encoding": {
+              "x": {
+                "field": "country_name",
+                "title": "Country",
+                "axis": {"domain": false, "labelAngle": -45}
+              },
+              "y": {
+                "field": "factor",
+                "title": "Happiness Ladder Score",
+                "type": "quantitative",
+                "axis": {
+                  "domain": false,
+                  "grid": false,
+                  "titlePadding": 15,
+                  "labelFlush": false
+                }
+              },
+              "color": {
+                "field": "explained_by",
+                "type": "nominal",
+                "title": "Factor of Happiness",
+                "legend": {
+                  "labelExpr": "datum.label == 'explained_by:Log_GDP_per_capita' ? 'Log GDP per capita' : datum.label == 'explained_by:Social_support' ? 'Social Support' :datum.label == 'explained_by:Healthy_life_expectancy' ? 'Healthy life expectancy'  : datum.label == 'explained_by:Generosity' ? 'Generousity' : datum.label == 'explained_by:Freedom_to_make_life_choices' ? 'Freedom to make life choices' : datum.label == 'explained_by:perceptions_of_corruption' ? 'Perceptions of corruption' : 'Dystopia + Residual'"
+                }
+              },
+              "tooltip": [
+                {"type": "nominal", "field": "country_name", "title": "Country"},
+                {
+                  "type": "quantitative",
+                  "field": "ladder_score",
+                  "title": "Happiness Score"
+                },
+                {"type": "quantitative", "field": "ladder_rank", "title": "Rank"},
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:Log_GDP_per_capita",
+                  "title": "Log GDP per capita"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:Social_support",
+                  "title": "Social Support"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:Healthy_life_expectancy",
+                  "title": "Healthy life expectancy"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:Generosity",
+                  "title": "Generousity"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:Freedom_to_make_life_choices",
+                  "title": "Freedom to make life choices"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "explained_by:perceptions_of_corruption",
+                  "title": "Perceptions of corruption"
+                },
+                {
+                  "type": "quantitative",
+                  "field": "Dystopia+residual",
+                  "title": "Dystopia + Residual"
+                }
+              ]
+            }
+          }
         ]
-    },
-    "config": {
-        "background": "#FBF9F7"
-    }
-}
+      },
+      {
+        "width": 1000,
+        "height": 200,
+        "mark": "bar",
+        "params": [
+          {"name": "region", "select": {"type": "point", "encodings": ["x"]}}
+        ],
+        "transform": [
+          {
+            "sort": [{"field": "ladder_score", "order": "descending"}],
+            "window": [{"op": "rank", "as": "ladder_rank"}]
+          },
+          {"filter": "datum.ladder_rank <= top_k_countries"},
+          {
+            "aggregate": [
+              {"op": "count", "field": "country_name", "as": "country_count"}
+            ],
+            "groupby": [
+              "regional_indicator",
+              "datum.ladder_rank <= top_k_countries"
+            ]
+          }
+        ],
+        "encoding": {
+          "x": {
+            "field": "regional_indicator",
+            "axis": {"labelAngle": -40, "domain": false},
+            "title": "Region"
+          },
+          "y": {
+            "field": "country_count",
+            "type": "quantitative",
+            "title": "Count of reported countries in each region",
+            "axis": {
+              "domain": false,
+              "grid": false,
+              "titlePadding": 15,
+              "labelFlush": false
+            }
+          },
+          "color": {
+            "condition": {"param": "region", "value": "#242254"},
+            "value": "grey"
+          },
+          "tooltip": [
+            {"type": "nominal", "field": "regional_indicator", "title": "Region"},
+            {
+              "type": "quantitative",
+              "field": "country_count",
+              "title": "No. of Reported Countries"
+            }
+          ]
+        }
+      }
+    ],
+    "config": {"background": "#FBF9F7", "view": {"stroke": "transparent"}}
+  }

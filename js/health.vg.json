@@ -1,0 +1,167 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 400,
+    "data": {
+      "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/data/world-happiness-report-2021.csv"
+    },
+    "encoding": {
+      "x": {
+        "field": "healthy_life_expectancy",
+        "type": "quantitative",
+        "axis": {"domain": false, "grid": false, "labelAngle": 0, "ticks": false}
+      },
+      "y": {
+        "field": "ladder_score",
+        "type": "quantitative",
+        "axis": {"domain": false, "labelAngle": 0, "ticks": false}
+      }
+    },
+    "params": [
+      {
+        "name": "region_filter",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Western Europe",
+            "North America and ANZ",
+            "Middle East and North Africa",
+            "Central and Eastern Europe",
+            "Latin America and Caribbean",
+            "East Asia",
+            "South Asia",
+            "Southeast Asia",
+            "Commonwealth of Independent States",
+            "Sub-Saharan Africa"
+          ],
+          "labels": [
+            "Show All",
+            "Western Europe",
+            "North America and ANZ",
+            "Middle East and North Africa",
+            "Central and Eastern Europe",
+            "Latin America and Caribbean",
+            "East Asia",
+            "South Asia",
+            "Southeast Asia",
+            "Commonwealth of Independent States",
+            "Sub-Saharan Africa"
+          ],
+          "name": "Select Region: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "region_filter == null || datum.regional_indicator == region_filter"
+      }
+    ],
+    "layer": [
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "dx": -10,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {
+            "field": "country_name",
+            "type": "nominal",
+            "condition": [
+              {
+                "test": "datum['country_name'] == 'Finland'",
+                "value": "Happiest Country: Finland"
+              },
+              {
+                "test": "datum['country_name'] == 'Afghanistan'",
+                "value": "Least Happiest Country: Afghanistan"
+              }
+            ]
+          },
+          "color": {"value": "darkblue"},
+          "opacity": {
+            "condition": {
+              "test": "datum['country_name'] == 'Finland' || datum['country_name'] == 'Afghanistan'",
+              "value": 1
+            },
+            "value": 0
+          }
+        }
+      },
+      {
+        "mark": {"type": "circle", "cursor": "pointer", "size": 100},
+        "encoding": {
+          "color": {
+            "title": "Region",
+            "field": "regional_indicator",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Western Europe",
+                "North America and ANZ",
+                "Middle East and North Africa",
+                "Central and Eastern Europe",
+                "Latin America and Caribbean",
+                "East Asia",
+                "South Asia",
+                "Southeast Asia",
+                "Commonwealth of Independent States",
+                "Sub-Saharan Africa"
+              ]
+            },
+            "legend": {"labelLimit": 200}
+          },
+          "tooltip": [
+            {"field": "country_name", "type": "nominal", "title": "Country"},
+            {"field": "regional_indicator", "type": "nominal", "title": "Region"},
+            {
+              "field": "ladder_score",
+              "type": "quantitative",
+              "title": "Happiness Ladder score"
+            },
+            {
+              "field": "healthy_life_expectancy",
+              "type": "quantitative",
+              "title": "Healthy Life Expectancy"
+            }
+          ]
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "brown"},
+        "transform": [
+          {"regression": "ladder_score", "on": "healthy_life_expectancy"}
+        ],
+        "encoding": {
+          "y": {
+            "field": "ladder_score",
+            "type": "quantitative",
+            "title": "Happiness Ladder score",
+            "axis": {
+              "domain": false,
+              "titlePadding": 15,
+              "labelAngle": 0,
+              "ticks": false
+            }
+          },
+          "x": {
+            "field": "healthy_life_expectancy",
+            "type": "quantitative",
+            "title": "Healthy Life Expectancy",
+            "axis": {
+              "domain": false,
+              "titlePadding": 15,
+              "labelAngle": 0,
+              "ticks": false
+            }
+          }
+        }
+      }
+    ],
+    "config": {
+      "style": {"cell": {"stroke": "transparent"}},
+      "background": "#FBF9F7"
+    }
+  }

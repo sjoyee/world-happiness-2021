@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
+    "width": 1000,
     "height": 400,
     "data": {
         "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report.csv"
@@ -8,12 +8,13 @@
     "params": [
         {
             "name": "top_k_countries",
-            "value": 5,
+            "value": 6,
             "bind": {
                 "input": "range",
                 "min": 1,
                 "max": 10,
-                "step": 1
+                "step": 1,
+                "name": "Top K Countries"
             }
         }
     ],
@@ -47,7 +48,8 @@
             "axis": {
                 "domain": false,
                 "titlePadding": 15,
-                "labelAngle": 0
+                "labelAngle": 0,
+                "ticks": false
             }
         },
         "y": {
@@ -75,7 +77,9 @@
         },
         "color": {
             "field": "country_name",
-            "type": "nominal"
+            "type": "nominal",
+            "title": "Country",
+            "scale": {"scheme": "rainbow"}
         },
         "tooltip": [
             {
@@ -97,26 +101,61 @@
             },
             "encoding": {
                 "color": {
-                    "field": "country_name"
+                    "field": "country_name",
+                     "scale": {"scheme": "rainbow"}
                 },
                 "size": {
+                    "condition": {
+                        "param": "legend_filter",
+                        "empty": false,
+                        "value": 3
+                    },
                     "value": 1
                 }
             }
         },
         {
+            "params": [
+                {
+                    "name": "legend_filter",
+                    "select": {
+                        "type": "point",
+                        "on": "click",
+                        "fields": [
+                            "country_name"
+                        ]
+                    },
+                    "bind": "legend"
+                }
+            ],
             "mark": {
                 "type": "tick",
                 "thickness": 5
             },
             "encoding": {
                 "color": {
+                    "condition": {
+                        "param": "legend_filter",
+                        "empty": false,
+                        "value": "black"
+                    },
                     "field": "country_name"
+                },
+                 "size": {
+                    "condition": {
+                        "param": "legend_filter",
+                        "empty": false,
+                        "value": 20
+                    },
+                    "value": 10
                 }
             }
         }
     ],
     "config": {
-        "background": "#FBF9F7"
+        "background": "#FBF9F7",
+        "view": {
+            "stroke": "transparent"
+        }
     }
 }

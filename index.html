@@ -9,43 +9,114 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     <script src="js/vega_lite_vis.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
     <title>World Happiness 2021</title>
   </head>
   <body>
     <div id="container">
-      <h1>World Happiness Report</h1>
+      <div class="sec-header">
+        <img
+          class="logo-img"
+          src="images/logo.png"
+          alt="logo"
+          width="200"
+          height="230"
+        />
+      </div>
+      <div class="sec-border"></div>
+      <div id="header">
+        <h1>World Happiness Report</h1>
+      </div>
 
-      <p>
-        The World Happiness Report is a landmark survey of the state of global
-        happiness.
-      </p>
+      <div class="viz-row">
+        <div class="chart-holder">
+          <h2>World Map of Happiness</h2>
+          <div id="choropleth_map"></div>
+        </div>
+        <div class="text-holder">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, <span class="coloured">test</span>when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </p>
+        </div>
+      </div>
+      <div class="separator"></div>
 
-      <br />
-      <h2>World Map of Happiness</h2>
-      <p>
-        In this map, check out the ladder scores of happiness for each country.
-      </p>
-      <div id="choropleth_map" style="margin: 50px"></div>
-      <h2>World Rank of Happiness</h2>
-      <h3>Rank of Happiness of the Top K Countries</h3>
-      <div id="line_chart" style="margin: 50px"></div>
-      <h2>Factors of World Happiness</h2>
-      <p style="margin: 0 250px;">
-        The happiness score estimate the extent to which each of six factors –
-        economic production, social support, life expectancy, freedom, absence
-        of corruption, and generosity contribute to making life evaluations
-        higher in each country than they are in Dystopia
-      </p>
-      <h3>Factors of World Happiness in the Past Years</h3>
-      <div id="parallel_chart" style="margin: 50px"></div>
-      <h3>In 2021,</h3>
-      <h3>How do the factors make up the final Happiness Score?</h3>
-      <div id="bar_chart" style="margin: 50px"></div>
-      <h2>Average Happiness Ladder Score</h2>
-      <h3>
-        Average Happiness Ladder Score of Different Regions from 2005 to 2020
-      </h3>
-      <div id="area_chart" style="margin: 50px"></div>
+      <div class="chart-holder">
+
+        <h2>World Rank of Happiness</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+        <div id="rank_chart"></div>
+        
+      </div>
+      <div class="separator"></div>
+      <div class="chart-holder">
+
+        <h2>World Rank of Happiness</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+        <div id="bar_chart"></div>
+        
+      </div>
+      <div class="separator"></div>
+      <div class="viz-row">
+        <div class="text-holder">
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </p>
+        </div>
+        <div class="chart-holder">
+          <h2>World Map of Happiness</h2>
+          <div id="scatterplot_health"></div>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="chart-holder">
+
+        <h2>World Rank of Happiness</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+        <div id="line_chart"></div>
+        
+      </div>
+      <div style="padding: 20px"></div>
+      
+      <div class="sec-border"></div>
+      <div class="sec-header"></div>
+      
     </div>
   </body>
 </html>
