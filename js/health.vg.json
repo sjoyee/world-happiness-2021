@@ -103,6 +103,37 @@
     },
     {
       "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": 10,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "country_name",
+          "type": "nominal",
+          "condition": [
+            {
+              "test": "datum['country_name'] == 'Malaysia'",
+              "value": "Malaysia: 67.102"
+            }
+          ]
+        },
+        "color": {
+          "value": "darkblue"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['country_name'] == 'Malaysia'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
         "type": "circle",
         "cursor": "pointer",
         "size": 100

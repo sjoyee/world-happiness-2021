@@ -34,37 +34,22 @@
             },
             "key": "country_name",
             "fields": [
-              "ladder_score"
+              "ladder_score",
+              "regional_indicator"
             ]
           }
         },
         {
           "calculate": "datum.ladder_score",
           "as": "Ladder Score"
-        },
-        {
-          "sort": [
-            {
-              "field": "ladder_score",
-              "order": "descending"
-            }
-          ],
-          "window": [
-            {
-              "op": "rank",
-              "as": "ladder_rank"
-            }
-          ],
-          "groupby": [
-            "year"
-          ]
         }
       ],
       "projection": {
         "type": "equirectangular"
       },
       "mark": {
-        "type": "geoshape"
+        "type": "geoshape",
+        "cursor": "pointer"
       },
       "encoding": {
         "color": {
@@ -82,9 +67,9 @@
             "type": "quantitative"
           },
           {
-            "field": "ladder_rank",
-            "type": "quantitative",
-            "title": "Rank"
+            "field": "regional_indicator",
+            "type": "nominal",
+            "title": "Region"
           }
         ]
       }
@@ -93,7 +78,6 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "baseline": "top",
         "dy": -180,
         "fontStyle": "italic"
       },
@@ -105,13 +89,13 @@
             {
               "test": "datum['properties.NAME']== 'Finland'",
               "value": [
-                "Finland is ranked 1 among 149 countries in 2021."
+                "Finland is ranked first."
               ]
             }
           ]
         },
         "color": {
-          "value": "darkblue"
+          "value": "darkred"
         },
         "opacity": {
           "condition": {
@@ -126,9 +110,8 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "baseline": "bottom",
-        "dy": 0,
-        "dx": 100,
+        "dy": -30,
+        "dx": 70,
         "fontStyle": "italic"
       },
       "encoding": {
@@ -139,17 +122,50 @@
             {
               "test": "datum['properties.NAME']== 'Afghanistan'",
               "value": [
-                "Afghanistan is ranked last among 149 countries in 2021."
+                "Afghanistan is ranked last."
               ]
             }
           ]
         },
         "color": {
-          "value": "darkblue"
+          "value": "darkred"
         },
         "opacity": {
           "condition": {
             "test": "datum['properties.NAME']== 'Afghanistan'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dy": 0,
+        "dx": 120,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "properties.NAME",
+          "type": "nominal",
+          "condition": [
+            {
+              "test": "datum['properties.NAME']== 'Malaysia'",
+              "value": [
+                "Malaysia has the score of 5.384"
+              ]
+            }
+          ]
+        },
+        "color": {
+          "value": "darkred"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['properties.NAME']== 'Malaysia'",
             "value": 1
           },
           "value": 0
