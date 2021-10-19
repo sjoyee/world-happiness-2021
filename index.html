@@ -15,6 +15,24 @@
       href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon_io/site.webmanifest" />
     <title>World Happiness 2021</title>
   </head>
   <body>
@@ -40,83 +58,189 @@
         </div>
         <div class="text-holder">
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, <span class="coloured">test</span>when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            The <span class="bolded coloured2">World Happiness Report</span> is
+            the survey of the
+            <span class="bolded coloured2">state of global happiness</span>
+            which is published by Sustainable Development Solutions Network. In
+            <span class="bolded coloured">2021</span>, the report focuses on the
+            effects of COVID-19 on
+            <span class="bolded coloured2">happiness</span> and how people all
+            over the world have fared.
           </p>
-        </div>
-      </div>
-      <div class="separator"></div>
-
-      <div class="chart-holder">
-
-        <h2>World Rank of Happiness</h2>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-        <div id="rank_chart"></div>
-        
-      </div>
-      <div class="separator"></div>
-      <div class="chart-holder">
-
-        <h2>World Rank of Happiness</h2>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-        <div id="bar_chart"></div>
-        
-      </div>
-      <div class="separator"></div>
-      <div class="viz-row">
-        <div class="text-holder">
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            In the world map,
+            <span class="bolded coloured">149 countries</span> are coloured
+            based on their
+            <span class="bolded coloured2">ladder score of happiness</span>. The
+            <span class="bolded coloured2">higher ladder score</span>
+            indicates the <span class="bolded coloured2">happier</span> the
+            people of the country are. Among all,
+            <span class="bolded coloured2">Finland</span> is ranked
+            <span class="bolded coloured2">first</span> as the happiest country
+            in <span class="bolded coloured">2021</span>.
           </p>
         </div>
-        <div class="chart-holder">
-          <h2>World Map of Happiness</h2>
+      </div>
+      <div style="padding: 20px"></div>
+      <div class="separator"></div>
+      <div style="padding: 20px"></div>
+
+      <div class="chart-holder">
+        <h2>World Rank of Happiness</h2>
+        <h3>How do the countries ranked for happiness in the past years?</h3>
+        <p>
+          There is a series of changes on the
+          <span class="bolded coloured2">rank of happiness</span> over the past
+          years. The interactive chart below shows the
+          <span class="bolded coloured2">changes of the rank</span> for the
+          <span class="bolded coloured2">Top K Countries</span> from the year
+          <span class="bolded coloured">2005</span> to
+          <span class="bolded coloured">2020</span>.
+          <span class="coloured2 bolded">Finland</span>
+          which is the <span class="coloured2 bolded">happiest</span> country in
+          <span class="bolded coloured">2021</span> has been
+          <span class="coloured2 bolded">continuously ranked first</span> since
+          <span class="bolded coloured">2016</span>.
+        </p>
+        <div class="centered"><div id="rank_chart"></div></div>
+      </div>
+      <div style="padding: 20px"></div>
+      <div class="separator"></div>
+      <div style="padding: 20px"></div>
+
+      <div class="chart-holder">
+        <h2>Factors of Happiness</h2>
+        <h3>What makes up the score of happiness?</h3>
+        <div class="viz-row">
+          <p style="padding-right: 50px; width: 50%">
+            The happiness scores estimate the extent to the
+            <span class="bolded coloured"
+              >economic production, social support, healthy life expectancy,
+              freedom to make life choices, perceptions of corruption and
+              generosity</span
+            >
+            contribute in
+            <span class="bolded coloured2">making life evaluations higher</span>
+            in each country than they are in
+            <span class="bolded coloured">Dystopia</span>, which is a
+            hypothetical country that has values equal to
+            <span class="coloured2 bolded"
+              >the world’s lowest national averages</span
+            >
+            for each of the six factors.
+          </p>
+          <p style="padding-left: 50px; width: 50%">
+            The
+            <span class="bolded coloured2">Top K Countries</span> in
+            <span class="bolded coloured">2021</span> with its respective scores
+            gained for each factor, along with the residual and the comparison
+            score with Dystopia are displayed. Each of these factors are
+            computed to a certain score to
+            <span class="bolded coloured2"
+              >total up as the happiness score</span
+            >
+            (full: <span class="bolded coloured">10</span>). Click the bar of
+            the region bar chart to filter the region.
+          </p>
+        </div>
+
+        <div class="centered">
+          <div id="bar_chart"></div>
+        </div>
+      </div>
+      <div style="padding: 20px"></div>
+      <div class="separator"></div>
+      <div style="padding: 20px"></div>
+      <div class="chart-holder">
+        <h2>Average Happiness Score for Each Region</h2>
+        <h3>How happy is the people in each region in the past years?</h3>
+        <div class="viz-row">
+          <p style="padding-right: 50px; width: 50%">
+            From the year <span class="bolded coloured">2005</span> to
+            <span class="bolded coloured">2020</span>, the
+            <span class="bolded coloured2"
+              >trend of the average happiness score for each region</span
+            >
+            is observed. The average is calculated by taking the total happiness
+            score of all countries in the region and divided by the number of
+            reported countries. Among the 16 years, the average happiness score
+            of the
+            <span class="bolded coloured2">North America and ANZ</span> hits the
+            <span class="bolded coloured">highest</span> in
+            <span class="bolded coloured">2009</span> and
+            <span class="bolded coloured2">Sub-Saharan Africa</span> hits the
+            <span class="bolded coloured">lowest</span> in
+            <span class="bolded coloured">2013</span>.
+          </p>
+          <p style="padding-left: 50px; width: 50%">
+            <span class="bolded coloured2">North America and ANZ</span> is
+            constantly shown to be maintaining as the
+            <span class="bolded coloured">happiest region</span> over the past
+            years, and
+            <span class="bolded coloured2">Western Europe</span> comes as the
+            <span class="bolded coloured">second</span>. Meanwhile,
+            <span class="bolded coloured2">Sub-Saharan Africa</span> is always
+            the <span class="bolded coloured">least happy region</span>.
+            However, for the year <span class="bolded coloured">2017</span> to
+            <span class="bolded coloured">2019</span>,
+            <span class="bolded coloured2">South Asia</span> becomes the region
+            with the
+            <span class="bolded coloured">lowest average happiness score</span>.
+          </p>
+        </div>
+        <div class="centered">
+          <div id="line_chart"></div>
+        </div>
+      </div>
+      <div style="padding: 20px"></div>
+      <div class="separator"></div>
+      <div style="padding: 20px"></div>
+
+      <div class="viz-row">
+        <div>
+          <h2 style="text-align: justify; margin: 30px">
+            Happiness and Health
+          </h2>
+          <h3 style="text-align: justify; margin: 30px">
+            Are you happier if you are healthier?
+          </h3>
+
+          <div class="text-holder">
+            <p>
+              <span class="bolded coloured2"
+                >Healthy Life Expectancy (HALE)</span
+              >
+              is defined as the average number of years that a person can
+              <span class="bolded coloured2"
+                >expect to live in "full health"</span
+              >
+              by taking into account years lived in less than full health due to
+              disease and/or injury. It is computed to a score with
+              <span class="bolded coloured">100</span> as the
+              <span class="bolded coloured2">full score</span>. Based on the
+              plot, it is proven that there is a
+              <span class="bolded coloured2"
+                >high correlation between happiness and health</span
+              >, and a
+              <span class="bolded coloured2"
+                >strong proportional relationship</span
+              >
+              at that. In general, if the
+              <span class="bolded coloured">HALE</span> of a country is
+              <span class="bolded coloured">high</span>, the people will be
+              <span class="bolded coloured">happier</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="chart-holder centered">
           <div id="scatterplot_health"></div>
         </div>
       </div>
-      <div class="separator"></div>
-      <div class="chart-holder">
+      <div style="padding: 60px"></div>
 
-        <h2>World Rank of Happiness</h2>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-        <div id="line_chart"></div>
-        
-      </div>
-      <div style="padding: 20px"></div>
-      
       <div class="sec-border"></div>
       <div class="sec-header"></div>
-      
     </div>
   </body>
 </html>

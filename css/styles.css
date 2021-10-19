@@ -5,6 +5,12 @@ body {
 
 p {
   color: grey;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+h2 {
+  font-size: 28px;
 }
 
 #container {
@@ -43,36 +49,40 @@ p {
   padding: 0;
 }
 
+.centered {
+  text-align: center;
+}
+
 .chart-holder {
   display: flex;
   flex-direction: column;
-  text-align: left;
-  margin: 0 10px 50px 50px;
+  text-align: justify;
+  margin: 10px 30px;
 }
 
 .text-holder {
-  width: 40%;
-  margin: 50px 50px 50px 50px;
+  margin: 50px 30px;
   text-align: justify;
 }
 
 .viz-row {
   display: flex;
   flex-direction: row;
-  padding-left: 20px;
 }
 
 .separator {
   background-color: #242254;
   height: 120px;
-  margin: 10px 0;
-  padding: 0;
 }
 
 .bolded {
-  text-decoration: solid;
+  font-weight: bolder;
 }
 
 .coloured {
   color: #800000;
+}
+
+.coloured2 {
+  color: #242254;
 }

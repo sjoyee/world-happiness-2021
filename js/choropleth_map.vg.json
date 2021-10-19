@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/js/world.topojson",
+    "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/js/world.topojson",
     "format": {
       "type": "topojson",
       "feature": "ne_110m_admin_0_countries"
@@ -19,7 +19,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/js/world.topojson",
+        "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/js/world.topojson",
         "format": {
           "type": "topojson",
           "feature": "ne_110m_admin_0_countries"
@@ -30,7 +30,7 @@
           "lookup": "properties.NAME",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/data/world-happiness-report-2021.csv"
+              "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/data/world-happiness-report-2021.csv"
             },
             "key": "country_name",
             "fields": [

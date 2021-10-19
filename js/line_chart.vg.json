@@ -1,134 +1,171 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 950,
-    "height": 500,
-    "data": {
-      "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report.csv"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 950,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/data/world-happiness-report.csv"
+  },
+  "transform": [
+    {
+      "lookup": "country_name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/data/world-happiness-report-2021.csv"
+        },
+        "key": "country_name",
+        "fields": [
+          "regional_indicator"
+        ]
+      }
     },
-    "transform": [
-      {
-        "lookup": "country_name",
-        "from": {
-          "data": {
-            "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/data/world-happiness-report-2021.csv"
-          },
-          "key": "country_name",
-          "fields": ["regional_indicator"]
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "life_ladder",
+          "as": "avg_life_ladder"
         }
+      ],
+      "groupby": [
+        "year",
+        "regional_indicator"
+      ]
+    },
+    {
+      "filter": "datum.regional_indicator != null"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "title": "Year",
+      "type": "temporal",
+      "axis": {
+        "domain": false,
+        "grid": false,
+        "labelFlush": false,
+        "titlePadding": 15
+      }
+    },
+    "y": {
+      "field": "avg_life_ladder",
+      "title": "Average. Happiness Ladder Score",
+      "type": "quantitative",
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "titlePadding": 15
+      }
+    },
+    "color": {
+      "field": "regional_indicator",
+      "title": "Region",
+      "legend": {
+        "labelLimit": 200
+      }
+    },
+    "tooltip": [
+      {
+        "field": "regional_indicator",
+        "title": "Region"
       },
       {
-        "aggregate": [
-          {"op": "mean", "field": "life_ladder", "as": "avg_life_ladder"}
-        ],
-        "groupby": ["year", "regional_indicator"]
-      },
-      {"filter": "datum.regional_indicator != null"}
-    ],
-    "encoding": {
-      "x": {
         "field": "year",
         "title": "Year",
         "type": "temporal",
-        "axis": {
-          "domain": false,
-          "grid": false,
-          "labelFlush": false,
-          "titlePadding": 15
-        }
+        "format": "%Y"
       },
-      "y": {
+      {
         "field": "avg_life_ladder",
-        "title": "Average. Happiness Ladder Score",
-        "type": "quantitative",
-        "axis": {"domain": false, "ticks": false, "titlePadding": 15}
+        "title": "Avg. Happiness Ladder Score",
+        "format": ".3f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": -20,
+        "fontStyle": "italic"
       },
-      "color": {
-        "field": "regional_indicator",
-        "title": "Region",
-        "legend": {"labelLimit": 200}
-      },
-      "tooltip": [
-        {"field": "regional_indicator", "title": "Region"},
-        {"field": "year", "title": "Year", "type": "temporal", "format": "%Y"},
-        {
+      "encoding": {
+        "text": {
           "field": "avg_life_ladder",
-          "title": "Avg. Happiness Ladder Score",
-          "format": ".3f"
-        }
-      ]
-    },
-    "layer": [
-      {
-        "mark": {
-          "type": "text",
-          "align": "center",
-          "baseline": "top",
-          "dy": -20,
-          "fontStyle":"italic"
-        },
-        "encoding": {
-          "text": {
-            "field": "avg_life_ladder",
-            "type": "nominal",
-            "condition": [
-              {
-                "test": "datum['avg_life_ladder'] >= 7.488",
-                "value": ["Happiest Region: North America and ANZ (Highest Avg. in 2009)"]
-              }
-            ]
-          },
-          "color": {"value": "darkblue"},
-          "opacity": {
-            "condition": {
+          "type": "nominal",
+          "condition": [
+            {
               "test": "datum['avg_life_ladder'] >= 7.488",
-              "value": 1
-            },
-            "value": 0
-          }
-        }
-      },
-      {
-        "mark": {
-          "type": "text",
-          "align": "center",
-          "baseline": "top",
-          "dy": 20,
-          "fontStyle":"italic"
+              "value": [
+                "Happiest Region: North America and ANZ (Highest Avg. in 2009)"
+              ]
+            }
+          ]
         },
-        "encoding": {
-          "text": {
-            "field": "avg_life_ladder",
-            "type": "nominal",
-            "condition": [
-              
-              {
-                "test": "datum['avg_life_ladder'] <= 4.025",
-                "value": ["Least Happiest Region: Sub-Saharan Africa (Lowest Avg. in 2013)"]
-              },
-              {
-                "test": "datum['avg_life_ladder'] == 4.1405",
-                "value": ["In 2017-2019, South Asia has the lowest average score among the regions."]
-              }
-            ]
+        "color": {
+          "value": "darkblue"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['avg_life_ladder'] >= 7.488",
+            "value": 1
           },
-          "color": {"value": "darkblue"},
-          "opacity": {
-            "condition": {
-              "test": "datum['avg_life_ladder'] <= 4.025 || datum['avg_life_ladder'] == 4.1405",
-              "value": 1
-            },
-            "value": 0
-          }
-        }
-      },
-      {
-        "mark": {
-          "type": "line",
-          "point": true,
-          "interpolate": "monotone",
-          "cursor": "pointer"
+          "value": 0
         }
       }
-    ],
-    "config": {"background": "#FBF9F7", "view": {"stroke": "transparent"}}
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dy": 20,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "avg_life_ladder",
+          "type": "nominal",
+          "condition": [
+            {
+              "test": "datum['avg_life_ladder'] <= 4.025",
+              "value": [
+                "Least Happy Region: Sub-Saharan Africa (Lowest Avg. in 2013)"
+              ]
+            },
+            {
+              "test": "datum['avg_life_ladder'] == 4.1405",
+              "value": [
+                "In 2017-2019, South Asia has the lowest average score among the regions."
+              ]
+            }
+          ]
+        },
+        "color": {
+          "value": "darkblue"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['avg_life_ladder'] <= 4.025 || datum['avg_life_ladder'] == 4.1405",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "point": true,
+        "interpolate": "monotone",
+        "cursor": "pointer"
+      }
+    }
+  ],
+  "config": {
+    "background": "#FBF9F7",
+    "view": {
+      "stroke": "transparent"
+    }
   }
+}

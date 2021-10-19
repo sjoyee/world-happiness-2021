@@ -1,167 +1,200 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 500,
-    "height": 400,
-    "data": {
-      "url": "https://raw.githubusercontent.com/sjoyee/FIT3179-W9-Homework/main/data/world-happiness-report-2021.csv"
-    },
-    "encoding": {
-      "x": {
-        "field": "healthy_life_expectancy",
-        "type": "quantitative",
-        "axis": {"domain": false, "grid": false, "labelAngle": 0, "ticks": false}
-      },
-      "y": {
-        "field": "ladder_score",
-        "type": "quantitative",
-        "axis": {"domain": false, "labelAngle": 0, "ticks": false}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/data/world-happiness-report-2021.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "healthy_life_expectancy",
+      "type": "quantitative",
+      "axis": {
+        "domain": false,
+        "grid": false,
+        "labelAngle": 0,
+        "ticks": false
       }
     },
-    "params": [
-      {
-        "name": "region_filter",
-        "bind": {
-          "input": "select",
-          "options": [
-            null,
-            "Western Europe",
-            "North America and ANZ",
-            "Middle East and North Africa",
-            "Central and Eastern Europe",
-            "Latin America and Caribbean",
-            "East Asia",
-            "South Asia",
-            "Southeast Asia",
-            "Commonwealth of Independent States",
-            "Sub-Saharan Africa"
-          ],
-          "labels": [
-            "Show All",
-            "Western Europe",
-            "North America and ANZ",
-            "Middle East and North Africa",
-            "Central and Eastern Europe",
-            "Latin America and Caribbean",
-            "East Asia",
-            "South Asia",
-            "Southeast Asia",
-            "Commonwealth of Independent States",
-            "Sub-Saharan Africa"
-          ],
-          "name": "Select Region: "
-        }
+    "y": {
+      "field": "ladder_score",
+      "type": "quantitative",
+      "axis": {
+        "domain": false,
+        "labelAngle": 0,
+        "ticks": false
       }
-    ],
-    "transform": [
-      {
-        "filter": "region_filter == null || datum.regional_indicator == region_filter"
+    }
+  },
+  "params": [
+    {
+      "name": "region_filter",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Western Europe",
+          "North America and ANZ",
+          "Middle East and North Africa",
+          "Central and Eastern Europe",
+          "Latin America and Caribbean",
+          "East Asia",
+          "South Asia",
+          "Southeast Asia",
+          "Commonwealth of Independent States",
+          "Sub-Saharan Africa"
+        ],
+        "labels": [
+          "All",
+          "Western Europe",
+          "North America and ANZ",
+          "Middle East and North Africa",
+          "Central and Eastern Europe",
+          "Latin America and Caribbean",
+          "East Asia",
+          "South Asia",
+          "Southeast Asia",
+          "Commonwealth of Independent States",
+          "Sub-Saharan Africa"
+        ],
+        "name": "Select Region: "
       }
-    ],
-    "layer": [
-      {
-        "mark": {
-          "type": "text",
-          "align": "right",
-          "dx": -10,
-          "fontStyle": "italic"
-        },
-        "encoding": {
-          "text": {
-            "field": "country_name",
-            "type": "nominal",
-            "condition": [
-              {
-                "test": "datum['country_name'] == 'Finland'",
-                "value": "Happiest Country: Finland"
-              },
-              {
-                "test": "datum['country_name'] == 'Afghanistan'",
-                "value": "Least Happiest Country: Afghanistan"
-              }
-            ]
-          },
-          "color": {"value": "darkblue"},
-          "opacity": {
-            "condition": {
-              "test": "datum['country_name'] == 'Finland' || datum['country_name'] == 'Afghanistan'",
-              "value": 1
-            },
-            "value": 0
-          }
-        }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "region_filter == null || datum.regional_indicator == region_filter"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -10,
+        "fontStyle": "italic"
       },
-      {
-        "mark": {"type": "circle", "cursor": "pointer", "size": 100},
-        "encoding": {
-          "color": {
-            "title": "Region",
-            "field": "regional_indicator",
-            "type": "nominal",
-            "scale": {
-              "domain": [
-                "Western Europe",
-                "North America and ANZ",
-                "Middle East and North Africa",
-                "Central and Eastern Europe",
-                "Latin America and Caribbean",
-                "East Asia",
-                "South Asia",
-                "Southeast Asia",
-                "Commonwealth of Independent States",
-                "Sub-Saharan Africa"
-              ]
-            },
-            "legend": {"labelLimit": 200}
-          },
-          "tooltip": [
-            {"field": "country_name", "type": "nominal", "title": "Country"},
-            {"field": "regional_indicator", "type": "nominal", "title": "Region"},
+      "encoding": {
+        "text": {
+          "field": "country_name",
+          "type": "nominal",
+          "condition": [
             {
-              "field": "ladder_score",
-              "type": "quantitative",
-              "title": "Happiness Ladder score"
+              "test": "datum['country_name'] == 'Finland'",
+              "value": "Finland: Happiest country with HALE score of 72"
             },
             {
-              "field": "healthy_life_expectancy",
-              "type": "quantitative",
-              "title": "Healthy Life Expectancy"
+              "test": "datum['country_name'] == 'Afghanistan'",
+              "value": "Afghanistan: Least happy country with HALE score of 52.493"
             }
           ]
+        },
+        "color": {
+          "value": "darkblue"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['country_name'] == 'Finland' || datum['country_name'] == 'Afghanistan'",
+            "value": 1
+          },
+          "value": 0
         }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "cursor": "pointer",
+        "size": 100
       },
-      {
-        "mark": {"type": "line", "color": "brown"},
-        "transform": [
-          {"regression": "ladder_score", "on": "healthy_life_expectancy"}
-        ],
-        "encoding": {
-          "y": {
+      "encoding": {
+        "color": {
+          "title": "Region",
+          "field": "regional_indicator",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Western Europe",
+              "North America and ANZ",
+              "Middle East and North Africa",
+              "Central and Eastern Europe",
+              "Latin America and Caribbean",
+              "East Asia",
+              "South Asia",
+              "Southeast Asia",
+              "Commonwealth of Independent States",
+              "Sub-Saharan Africa"
+            ]
+          },
+          "legend": {
+            "labelLimit": 200
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country_name",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "regional_indicator",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
             "field": "ladder_score",
             "type": "quantitative",
-            "title": "Happiness Ladder score",
-            "axis": {
-              "domain": false,
-              "titlePadding": 15,
-              "labelAngle": 0,
-              "ticks": false
-            }
+            "title": "Happiness Ladder score"
           },
-          "x": {
+          {
             "field": "healthy_life_expectancy",
             "type": "quantitative",
-            "title": "Healthy Life Expectancy",
-            "axis": {
-              "domain": false,
-              "titlePadding": 15,
-              "labelAngle": 0,
-              "ticks": false
-            }
+            "title": "Healthy Life Expectancy"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "color": "brown"
+      },
+      "transform": [
+        {
+          "regression": "ladder_score",
+          "on": "healthy_life_expectancy"
+        }
+      ],
+      "encoding": {
+        "y": {
+          "field": "ladder_score",
+          "type": "quantitative",
+          "title": "Happiness Ladder score",
+          "axis": {
+            "domain": false,
+            "titlePadding": 15,
+            "ticks": false
+          }
+        },
+        "x": {
+          "field": "healthy_life_expectancy",
+          "type": "quantitative",
+          "title": "Healthy Life Expectancy",
+          "axis": {
+            "domain": false,
+            "titlePadding": 15,
+            "ticks": false
           }
         }
       }
-    ],
-    "config": {
-      "style": {"cell": {"stroke": "transparent"}},
-      "background": "#FBF9F7"
     }
+  ],
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    },
+    "background": "#FBF9F7"
   }
+}

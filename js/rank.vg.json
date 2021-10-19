@@ -3,7 +3,7 @@
     "width": 1000,
     "height": 400,
     "data": {
-        "url": "https://raw.githubusercontent.com/sjoyee/FIT3179_W10_Homework/main/data/world-happiness-report.csv"
+        "url": "https://raw.githubusercontent.com/sjoyee/world-happiness-2021/main/data/world-happiness-report.csv"
     },
     "params": [
         {
@@ -79,7 +79,9 @@
             "field": "country_name",
             "type": "nominal",
             "title": "Country",
-            "scale": {"scheme": "rainbow"}
+            "scale": {
+                "scheme": "rainbow"
+            }
         },
         "tooltip": [
             {
@@ -87,9 +89,17 @@
                 "title": "Country"
             },
             {
+                "field": "year",
+                "title": "Year"
+            },
+            {
                 "field": "life_ladder",
                 "title": "Happiness Ladder Score",
                 "format": ".3f"
+            },
+            {
+                "field": "ladder_rank",
+                "title": "Rank"
             }
         ]
     },
@@ -102,7 +112,12 @@
             "encoding": {
                 "color": {
                     "field": "country_name",
-                     "scale": {"scheme": "rainbow"}
+                    "scale": {
+                        "scheme": "rainbow"
+                    },
+                    "legend": {
+                        "offset": 50
+                    }
                 },
                 "size": {
                     "condition": {
@@ -141,13 +156,47 @@
                     },
                     "field": "country_name"
                 },
-                 "size": {
+                "size": {
                     "condition": {
                         "param": "legend_filter",
                         "empty": false,
                         "value": 20
                     },
                     "value": 10
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "top",
+                "dy": -20,
+                "dx": -15,
+                "fontStyle": "italic"
+            },
+            "encoding": {
+                "text": {
+                    "field": "ladder_rank",
+                    "type": "quantitative",
+                    "condition": [
+                        {
+                            "test": "datum['ladder_rank'] == 1 && datum['year'] == 2016",
+                            "value": [
+                                "Finland has been continuously ranked first since 2016 till 2020."
+                            ]
+                        }
+                    ]
+                },
+                "color": {
+                    "value": "darkblue"
+                },
+                "opacity": {
+                    "condition": {
+                        "test": "datum['ladder_rank'] == 1 && datum['year'] == 2016",
+                        "value": 1
+                    },
+                    "value": 0
                 }
             }
         }
