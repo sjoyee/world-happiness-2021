@@ -209,7 +209,10 @@
     {
       "width": 1000,
       "height": 100,
-      "mark": "bar",
+      "mark": {
+        "type": "bar",
+        "cursor": "pointer"
+      },
       "params": [
         {
           "name": "region",

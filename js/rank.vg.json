@@ -107,7 +107,8 @@
         {
             "mark": {
                 "type": "line",
-                "interpolate": "monotone"
+                "interpolate": "monotone",
+                "cursor": "pointer"
             },
             "encoding": {
                 "color": {
@@ -145,7 +146,8 @@
             ],
             "mark": {
                 "type": "tick",
-                "thickness": 5
+                "thickness": 5,
+                "cursor": "pointer"
             },
             "encoding": {
                 "color": {

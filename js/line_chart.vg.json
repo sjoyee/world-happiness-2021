@@ -35,68 +35,75 @@
       "filter": "datum.regional_indicator != null"
     }
   ],
-  "encoding": {
-    "x": {
-      "field": "year",
-      "title": "Year",
-      "type": "temporal",
-      "axis": {
-        "domain": false,
-        "grid": false,
-        "labelFlush": false,
-        "titlePadding": 15
-      }
-    },
-    "y": {
-      "field": "avg_life_ladder",
-      "title": "Average. Happiness Ladder Score",
-      "type": "quantitative",
-      "axis": {
-        "domain": false,
-        "ticks": false,
-        "titlePadding": 15
-      }
-    },
-    "color": {
-      "field": "regional_indicator",
-      "title": "Region",
-      "legend": {
-        "labelLimit": 200
-      }
-    },
-    "tooltip": [
-      {
-        "field": "regional_indicator",
-        "title": "Region"
-      },
-      {
-        "field": "year",
-        "title": "Year",
-        "type": "temporal",
-        "format": "%Y"
-      },
-      {
-        "field": "avg_life_ladder",
-        "title": "Avg. Happiness Ladder Score",
-        "format": ".3f"
-      }
-    ]
-  },
   "layer": [
     {
       "mark": {
+        "type": "line",
+        "point": true,
+        "interpolate": "monotone",
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "title": "Year",
+          "type": "temporal",
+          "axis": {
+            "domain": false,
+            "grid": false,
+            "labelFlush": false,
+            "titlePadding": 15
+          }
+        },
+        "y": {
+          "field": "avg_life_ladder",
+          "title": "Average. Happiness Ladder Score",
+          "type": "quantitative",
+          "axis": {
+            "domain": false,
+            "ticks": false,
+            "titlePadding": 15
+          }
+        },
+        "color": {
+          "field": "regional_indicator",
+          "title": "Region",
+          "legend": {
+            "labelLimit": 200
+          }
+        },
+        "tooltip": [
+          {
+            "field": "regional_indicator",
+            "title": "Region"
+          },
+          {
+            "field": "year",
+            "title": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          },
+          {
+            "field": "avg_life_ladder",
+            "title": "Avg. Happiness Ladder Score",
+            "format": ".3f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
         "type": "text",
-        "align": "center",
-        "dy": -20,
+        "align": "right",
+        "dy": -240,
+        "dx": -80,
         "fontStyle": "italic"
       },
       "encoding": {
         "text": {
-          "field": "avg_life_ladder",
-          "type": "nominal",
           "condition": [
             {
-              "test": "datum['avg_life_ladder'] >= 7.488",
+              "test": "datum['avg_life_ladder'] <= 4.025",
               "value": [
                 "Happiest Region: North America and ANZ (Highest Avg. in 2009)"
               ]
@@ -108,7 +115,7 @@
         },
         "opacity": {
           "condition": {
-            "test": "datum['avg_life_ladder'] >= 7.488",
+            "test": "datum['avg_life_ladder'] <= 4.025",
             "value": 1
           },
           "value": 0
@@ -119,20 +126,44 @@
       "mark": {
         "type": "text",
         "align": "center",
-        "dy": 20,
+        "dy": 30,
+        "dx": 20,
         "fontStyle": "italic"
       },
       "encoding": {
         "text": {
-          "field": "avg_life_ladder",
-          "type": "nominal",
           "condition": [
             {
               "test": "datum['avg_life_ladder'] <= 4.025",
               "value": [
                 "Least Happy Region: Sub-Saharan Africa (Lowest Avg. in 2013)"
               ]
-            },
+            }
+          ]
+        },
+        "color": {
+          "value": "darkblue"
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum['avg_life_ladder'] <= 4.025",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dy": 10,
+        "dx": 200,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "condition": [
             {
               "test": "datum['avg_life_ladder'] == 4.1405",
               "value": [
@@ -146,19 +177,11 @@
         },
         "opacity": {
           "condition": {
-            "test": "datum['avg_life_ladder'] <= 4.025 || datum['avg_life_ladder'] == 4.1405",
+            "test": "datum['avg_life_ladder'] == 4.1405",
             "value": 1
           },
           "value": 0
         }
-      }
-    },
-    {
-      "mark": {
-        "type": "line",
-        "point": true,
-        "interpolate": "monotone",
-        "cursor": "pointer"
       }
     }
   ],
